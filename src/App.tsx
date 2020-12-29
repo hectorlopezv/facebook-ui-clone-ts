@@ -5,6 +5,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import Header from './components/Header/Header';
 
 export interface AppProps {
   
@@ -14,7 +15,7 @@ const App: React.FC<AppProps> = () => {
   return (
     <div className="App">
         {/*Header */}
-
+        <Header />
         {/*App Body*/}
           {/*Sidebar*/}
           
