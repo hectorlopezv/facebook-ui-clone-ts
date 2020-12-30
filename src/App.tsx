@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import Header from './components/Header/Header';
 import SideBar from './components/SideBar/SideBar';
-
+import Feed from './components/Feed/Feed';
 export interface AppProps {
   
 }
@@ -20,6 +20,7 @@ const App: React.FC<AppProps> = () => {
 
         <div className="app__body">
            <SideBar />
+           <Feed />
         </div>
        
         {/*App Body*/}
