@@ -3,6 +3,7 @@ import './Feed.css';
 import StoryReel from './StoryReel/StoryReel';
 import Message from './Message/Message';
 import Post from './Post/Post';
+
 export interface FeedProps {
     
 }
@@ -27,7 +28,8 @@ const Feed: React.FC<FeedProps> = () => {
                 image={""}
             />
             {/*Widgets */}
-            
+
+
         </div>
     );
 }

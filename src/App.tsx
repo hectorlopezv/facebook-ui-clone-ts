@@ -7,35 +7,37 @@ import {
   Link
 } from "react-router-dom";
 import Header from './components/Header/Header';
-import SideBar from './components/SideBar/SideBar';
-import Feed from './components/Feed/Feed';
+import IsUserRedirect from './utils/routes';
+import Home from './pages/Home';
+import Login from './pages/Login';
+
 export interface AppProps {
   
 }
  
 const App: React.FC<AppProps> = () => {
+  const user =  '';
   return (
-    <div className="app">
-        {/*Header */}
-        <Header />
 
-        <div className="app__body">
-           <SideBar />
-           <Feed />
-        </div>
-       
-        {/*App Body*/}
-          {/*Sidebar*/}
-          
-          {/*Feed */ }
-            {/*Stories*/}
-            {/*Mesasge*/}
-            {/*Posts*/}
-          
-          {/*Widgets*/}
+        <Router>
+          <Switch>
+
+            <Route exact path='/login'>
+              <Login />
+            </Route>
+            <IsUserRedirect 
+              user={user} 
+              loggedInPath={'/login'}  
+              path={'/'}
+              exact={true}
+            >
+                <Home />
+            </IsUserRedirect>
+
+          </Switch>
+        </Router>
 
 
-    </div>
   );
 }
  
