@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
 import './Login.css';
-
+import {auth} from '../lib/firebase.prod';
 export interface LoginProps {
     
 }
@@ -10,6 +10,7 @@ const Login: React.FC<LoginProps> = () => {
 
 
     const signIn = () => {
+        //sign firebase sheit
     }
 
     return (  
