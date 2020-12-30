@@ -11,9 +11,8 @@ const IsUserRedirect= ({user, loggedInPath, children, ...props}) => {
             if(user == null){
               return children//render page or component ... user props
             }
-            console.log('el user', user);
+            
             if(user === ""){
-              console.log('entro 2');
               return (<Redirect 
                 to={{
                   pathname: loggedInPath
