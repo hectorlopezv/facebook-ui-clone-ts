@@ -31,8 +31,9 @@ const Header: React.FC<HeaderProps> = () => {
             <TextField
                     className={""}
                     id="input-with-icon-textfield"
-                    label="Outlined"
                     variant="outlined"
+                    placeholder="search Facebook"
+                    size='small'
                     InputProps={{
                     startAdornment: (
                         <InputAdornment position="start">
@@ -44,7 +45,7 @@ const Header: React.FC<HeaderProps> = () => {
             </div>
 
             <div className="header__middle">
-                <div className="header__option">
+                <div className="header__option header__option--active">
                     <HomeIcon fontSize="large" />
                 </div>
 
