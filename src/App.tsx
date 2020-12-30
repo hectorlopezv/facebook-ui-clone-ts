@@ -1,4 +1,5 @@
 import React from 'react';
+import './app.css'
 import {
   BrowserRouter as Router,
   Switch,
@@ -14,7 +15,7 @@ export interface AppProps {
  
 const App: React.FC<AppProps> = () => {
   return (
-    <div className="App">
+    <div className="app">
         {/*Header */}
         <Header />
 
