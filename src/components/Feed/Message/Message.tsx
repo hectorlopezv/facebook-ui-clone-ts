@@ -5,6 +5,9 @@ import VideocamIcon from '@material-ui/icons/Videocam';
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import { useStateValue } from '../../../Store/StateContext';
+import {db} from '../../../lib/firebase.prod';
+import firebase from 'firebase';
+
 export interface MessageProps {
     
 }
@@ -13,10 +16,16 @@ const Message: React.FC<MessageProps> = () => {
     const [state, dispatch] =  useStateValue();
     const [Input, setInput] = useState('');
     const [ImageURL, setImageURL] = useState('');
-
     const handleSubmit = (event: any) => {
         event.preventDefault();
         //Post to the FIRESTORE
+        db.collection('posts').add({
+            message: Input,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            profilePic: state.user.photoURL,
+            username: state.user.displayName,
+            image: ImageURL
+        });
         setInput('');
         setImageURL('');
     }
@@ -33,6 +42,7 @@ const Message: React.FC<MessageProps> = () => {
                     />
                     <input 
                         type="text" 
+                        value={ImageURL}
                         onChange={(event: any)=> setImageURL(event.target.value)} 
                         placeholder="image URL(Optional)"
                     />

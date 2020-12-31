@@ -12,7 +12,7 @@ export interface FeedProps {
 const Feed: React.FC<FeedProps> = () => {
     const [posts, setposts] = useState<any>();
     useEffect(() => {
-        db.collection('posts').onSnapshot((snapshot: any) => {//listener...
+        db.collection('posts').orderBy('timestamp', 'desc').onSnapshot((snapshot: any) => {//listener...
             setposts(snapshot.docs.map((doc: any) => ({
                 id: doc.id, data: doc.data()
             })));

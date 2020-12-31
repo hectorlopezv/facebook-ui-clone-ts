@@ -11,7 +11,7 @@ export interface PostProps {
     profilePic?: string;
     image?:string;
     username?: string;
-    timestamp?: string;
+    timestamp?: any;
     message?: string;
 }
  
@@ -23,7 +23,7 @@ const Post: React.FC<PostProps> = ({profilePic, image, username, timestamp, mess
                 <Avatar src={profilePic} className="post__avatar" />
                 <div className="post__topInfo">
                     <h3>{username}</h3>
-                    <p>Timestamp...</p>
+                    <p>{new Date(timestamp?.toDate()).toUTCString()}</p>
                 </div>
             </div>
 
