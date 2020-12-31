@@ -22,6 +22,7 @@ const Login: React.FC<LoginProps> = () => {
 
     const signIn = () => {
         //sign firebase sheit
+        
         auth.signInWithPopup(provider)
         .then((result: any) => {
             setOpen(false);

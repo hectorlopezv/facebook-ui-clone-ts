@@ -10,18 +10,38 @@ import ChatIcon from '@material-ui/icons/Chat';
 import StorefrontIcon from '@material-ui/icons/Storefront';
 import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
 import { useStateValue } from '../../Store/StateContext';
+import {auth} from '../../lib/firebase.prod';
+import {useHistory} from 'react-router-dom';
+
 export interface SideBarProps {
     
 }
  
 const SideBar: React.FC<SideBarProps> = () => {
+    const history = useHistory();
     const [state, dispatch] =  useStateValue();
+    const logoutHandler = () => {
+        console.log('entro xd')
+        auth.signOut().then((response: any) => {
+            //Signout Good
+            console.log('Logout baby');
+            dispatch({
+                type: 'SET_USER',
+                user: null
+            });
+            history.push('/login');
+        }).catch((error: any) =>  {
+            // An error happened.
+          });
+    }
+    
     return ( 
 
         <div className="sidebar">
             <SideBarRow
                 src={state.user.photoURL}
                 title={state.user.displayName}
+                onClick={logoutHandler}
             />
             <SideBarRow
                 Icon={LocalHospitalIcon}

@@ -30,7 +30,6 @@ const App: React.FC<AppProps> = () => {
               <Login />
             </Route>
 
-
             <IsUserRedirect 
               user={user} 
               loggedInPath={'/login'}  

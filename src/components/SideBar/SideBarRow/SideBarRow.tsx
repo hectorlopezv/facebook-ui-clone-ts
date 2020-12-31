@@ -6,13 +6,14 @@ export interface SideBarRowProps {
     title: string;
     src?: string;
     Icon?: any;
+    onClick?: any;
 }
  
 const SideBarRow: React.FC<SideBarRowProps> = (props) => {
     const {title, src, Icon} = props;
     return (  
 
-        <div className="sidebarRow">
+        <div className="sidebarRow" onClick={props.onClick}>
             {src && <Avatar src={src} />}
             {Icon && <Icon />}
             <h4>{title}</h4>
