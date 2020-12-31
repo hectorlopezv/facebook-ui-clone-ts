@@ -1,4 +1,3 @@
-//import
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';//cors middleware
@@ -8,9 +7,9 @@ import Grid from 'gridfs-stream';//streaming
 import bodyParser from 'body-parser';//json middleware
 import path from 'path';
 import Pusher from 'pusher';//listener pattern
-
+import Posts from './post.js';
 //db schema
-import Posts from './Post';
+
 
 
 //Grid stuff
@@ -91,7 +90,7 @@ app.post('/upload/post', (req, res)=> {
         }
     });
 });
-app.get();
+
 
 
 

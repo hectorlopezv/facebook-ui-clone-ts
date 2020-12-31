@@ -1,4 +1,3 @@
-
 import mongoose from 'mongoose';
 
 const postModel = mongoose.Schema({
@@ -8,6 +7,5 @@ const postModel = mongoose.Schema({
     avatar: String,
     timestamp: String
 });
-
 
 export default mongoose.model('posts', postModel);
