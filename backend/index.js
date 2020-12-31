@@ -24,6 +24,7 @@ const port = process.env.PORT || 9000;
 app.use(bodyParser.json());//read write json files
 app.use(cors({origin: true}));
 
+
 //db config stuff
 const mongoURI = 'mongodb+srv://hector:lamierda2@cluster0.gzybf.mongodb.net/fbdb?retryWrites=true&w=majority';
 
@@ -43,7 +44,7 @@ mongoose.connection.once('open', () => {
     console.log('db generic connected');
 });
 
-let gfs = null;
+let gfs;
 conn.once('open', () => {
     console.log('DB images connected');
     //setup for image uploadng and saving
@@ -61,13 +62,10 @@ const storage = new GridFsStorage({//making storage of images posible
                 filename: filename,
                 bucketName: 'images'
             };
-
             resolve(fileInfo);
         })
     }
-
 });
-
 
 const upload = multer({storage});//upload images and files
 
@@ -91,6 +89,20 @@ app.post('/upload/post', (req, res)=> {
     });
 });
 
+//Get Post messages
+app.get('/retrieve/posts', (req, res)=> {
+
+    Post.find().sort([['timestamp', 'descending']]).all((err, posts) => {
+        // do something with the array of posts
+        if(err) {
+            res.status(500).send(err);
+        } else {
+            res.status(200).send(data);
+        }
+
+      });
+
+});
 
 
 

@@ -31,9 +31,13 @@ const Post: React.FC<PostProps> = ({profilePic, image, username, timestamp, mess
                 <p>{message}</p>
             </div>
 
+            {/*image*/}
             <div className="post__image">
                 <img src={image} alt=""/>
             </div>
+
+
+
             <div className="post__options">
                 <div className="post__option">
                 <ThumbUpIcon />
