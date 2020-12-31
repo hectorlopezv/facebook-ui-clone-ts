@@ -8,10 +8,10 @@ const IsUserRedirect= ({user, loggedInPath, children, ...props}) => {
         <Route {...props}
           render={() => {
             //what to render if user is in store.. localstorage
-            if(user == null){
+            if(user){
               return children//render page or component ... user props
             }
-            
+
             if(user === ""){
               return (<Redirect 
                 to={{

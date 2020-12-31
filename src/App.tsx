@@ -6,6 +6,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+
 import Header from './components/Header/Header';
 import IsUserRedirect from './utils/routes';
 import Home from './pages/Home';
@@ -16,7 +17,7 @@ export interface AppProps {
 }
  
 const App: React.FC<AppProps> = () => {
-  const user =  '';
+  const user =  'jhjh';
   return (
 
         <Router>
@@ -25,6 +26,8 @@ const App: React.FC<AppProps> = () => {
             <Route exact path='/login'>
               <Login />
             </Route>
+
+
             <IsUserRedirect 
               user={user} 
               loggedInPath={'/login'}  

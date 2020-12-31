@@ -26,3 +26,21 @@
     background-color: white;
     color: #2e81f4;
 }
+
+.Modal {
+    color:  white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Modal > p {
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    padding: 10px;
+    height: 100px;
+    line-height: 100px;
+    white-space: nowrap;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
