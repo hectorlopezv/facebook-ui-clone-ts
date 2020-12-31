@@ -4,11 +4,13 @@ import './Message.css';
 import VideocamIcon from '@material-ui/icons/Videocam';
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
+import { useStateValue } from '../../../Store/StateContext';
 export interface MessageProps {
     
 }
  
 const Message: React.FC<MessageProps> = () => {
+    const [state, dispatch] =  useStateValue();
     const [Input, setInput] = useState('');
     const [ImageURL, setImageURL] = useState('');
 
@@ -22,12 +24,12 @@ const Message: React.FC<MessageProps> = () => {
     return (  
         <div className="message">
             <div className="message__top">
-                <Avatar src="https://avatars2.githubusercontent.com/u/46845790?s=460&u=74f9d06a8654751455170eb721ffd54de0fec990&v=4"/>
+                <Avatar src={state.user.photoURL}/>
                 <form>
                     <input 
                         className="message__input" value={Input} 
                         onChange={(event: any)=> setInput(event.target.value)} 
-                        type="text" placeholder="what on your mind?"
+                        type="text" placeholder={`what on your mind ${state.user.displayName}?`}
                     />
                     <input 
                         type="text" 

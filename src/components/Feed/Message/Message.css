@@ -6,6 +6,7 @@
     width: 100%;
     box-shadow: 0px 5px 7px -7px rgba(0, 0, 0, .75);
     background-color: white;
+    margin-bottom: 15px;
 }
 
 .message__top {

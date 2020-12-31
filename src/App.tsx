@@ -11,13 +11,16 @@ import Header from './components/Header/Header';
 import IsUserRedirect from './utils/routes';
 import Home from './pages/Home';
 import Login from './pages/Login';
+import { useStateValue } from './Store/StateContext';
 
 export interface AppProps {
   
 }
  
 const App: React.FC<AppProps> = () => {
-  const user =  'jhjh';
+  const [state, dispatch] =  useStateValue();
+  const user =  state.user;
+
   return (
 
         <Router>

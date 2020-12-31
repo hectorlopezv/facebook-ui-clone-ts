@@ -9,7 +9,10 @@ export const actionTypes = {
 const reducer = (state: any, action: any) => {
     switch(action.type){
         case actionTypes.SET_USER:
-            return {}
+            return {
+                ...state,
+                user: action.user
+            }
         default: 
             return state;
     }

@@ -16,6 +16,7 @@ export interface PostProps {
 }
  
 const Post: React.FC<PostProps> = ({profilePic, image, username, timestamp, message}) => {
+    
     return (  
         <div className="post">
             <div className="post__top">

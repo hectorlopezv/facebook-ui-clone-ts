@@ -5,7 +5,7 @@ import React,
     useReducer
 } from 'react';
 
-export const StateContext = createContext<{}>({});
+export const StateContext = createContext<any>(null);
 
 interface StateProps {
     initialState: any;

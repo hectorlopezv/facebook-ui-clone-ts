@@ -3,12 +3,16 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import GlobalStyle from './GlobalStyles';
-
-
+import {StateProvider} from './Store/StateContext';
+import reducer, {initialState} from './Store/reducer';
 ReactDOM.render(
-      <React.StrictMode>
+    <React.StrictMode>
     <GlobalStyle />
-    <App />
+    <StateProvider initialState={initialState} reducer={reducer}>
+       <App />
+    </StateProvider>
+     
+
   </React.StrictMode>
 ,
   document.getElementById('root')

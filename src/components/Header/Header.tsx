@@ -15,11 +15,14 @@ import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
 import StorefrontOutlinedIcon from '@material-ui/icons/StorefrontOutlined';
 import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
 import SubscriptionsOutlinedIcon from '@material-ui/icons/SubscriptionsOutlined';
+import { useStateValue } from '../../Store/StateContext';
+
 export interface HeaderProps {
     
 }
  
 const Header: React.FC<HeaderProps> = () => {
+    const [state, dispatch] =  useStateValue();
     return (  
         <div className="header">
             <div className="header__left">
@@ -69,7 +72,7 @@ const Header: React.FC<HeaderProps> = () => {
             <div className="header__right">
 
                 <div className="header__info">
-                    <Avatar alt="" src="/static/images/avatar/1.jpg" />
+                    <Avatar alt="" src={state.user.photoURL} />
                     <h4>Hector Lopez</h4>
                 </div>
                 <IconButton aria-label="delete">

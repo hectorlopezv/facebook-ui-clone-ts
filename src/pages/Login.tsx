@@ -4,7 +4,8 @@ import './Login.css';
 import {auth, provider} from '../lib/firebase.prod';
 import Modal from '@material-ui/core/Modal';
 import {useHistory} from 'react-router-dom';
-
+import {useStateValue} from '../Store/StateContext';
+import {actionTypes} from '../Store/reducer';
 export interface LoginProps {
     
 }
@@ -13,6 +14,8 @@ const Login: React.FC<LoginProps> = () => {
     const [Error, setError] = useState<string | null>(null);
     const [open, setOpen] = useState(false);
     const history = useHistory();
+    const [state, dispatch] =  useStateValue();
+
     const handleClose = () => {
         setOpen(false);
     };
@@ -23,6 +26,10 @@ const Login: React.FC<LoginProps> = () => {
         .then((result: any) => {
             setOpen(false);
             setError(null);
+            dispatch({
+                type: actionTypes.SET_USER,
+                user: result.user
+            });
             history.push('/');
         })
         .catch((error: any) =>{

@@ -9,17 +9,19 @@ import PeopleIcon from '@material-ui/icons/People';
 import ChatIcon from '@material-ui/icons/Chat';
 import StorefrontIcon from '@material-ui/icons/Storefront';
 import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
+import { useStateValue } from '../../Store/StateContext';
 export interface SideBarProps {
     
 }
  
 const SideBar: React.FC<SideBarProps> = () => {
+    const [state, dispatch] =  useStateValue();
     return ( 
 
         <div className="sidebar">
             <SideBarRow
-                src={"dsa"}
-                title={""}
+                src={state.user.photoURL}
+                title={state.user.displayName}
             />
             <SideBarRow
                 Icon={LocalHospitalIcon}

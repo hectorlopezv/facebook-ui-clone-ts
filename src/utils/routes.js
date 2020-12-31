@@ -7,12 +7,13 @@ const IsUserRedirect= ({user, loggedInPath, children, ...props}) => {
     return ( 
         <Route {...props}
           render={() => {
+            console.log('este es el user', user);
             //what to render if user is in store.. localstorage
             if(user){
               return children//render page or component ... user props
             }
 
-            if(user === ""){
+            if(user === null){
               return (<Redirect 
                 to={{
                   pathname: loggedInPath

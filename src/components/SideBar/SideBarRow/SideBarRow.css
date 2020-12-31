@@ -12,6 +12,7 @@
 
 .sidebarRow > h4 {
     margin-left: 20px;
+    white-space: nowrap;
     font-weight: 600;
 }
 
