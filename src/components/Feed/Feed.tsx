@@ -16,12 +16,19 @@ const pusher = new Pusher('f81994f70b8bafc3b71e', {
 
 const Feed: React.FC<FeedProps> = () => {
     const [posts, setposts] = useState<any>();
-    const syncFeed = () => {
-        instance.get('/retrieve/posts')
-        .then((res :any) => {
 
-        });
-    }
+
+    //get data when page load
+    useEffect(() => {
+        const syncFeed = async () => {
+           const request = await instance.get('/retrieve/posts');
+           setposts(request.data);
+        };
+        syncFeed();
+    }, []);
+
+
+    //pusherjs and mongodb and update post when data changes
     useEffect(() => {
         //setting pusher subcribe event
         const channel = pusher.subscribe('my-channel');
@@ -30,15 +37,20 @@ const Feed: React.FC<FeedProps> = () => {
             
         });
     }, []);
-    useEffect(() => {
-        db.collection('posts').orderBy('timestamp', 'desc').onSnapshot((snapshot: any) => {//listener...
-            setposts(snapshot.docs.map((doc: any) => ({
-                id: doc.id, data: doc.data()
-            })));
-        });
 
-        return
-    }, []);
+
+
+    //firebase store
+    // useEffect(() => {
+    //     db.collection('posts').orderBy('timestamp', 'desc').onSnapshot((snapshot: any) => {//listener...
+    //         setposts(snapshot.docs.map((doc: any) => ({
+    //             id: doc.id, data: doc.data()
+    //         })));
+    //     });
+    // }, []);//take post from mongodb
+
+
+
     return (  
         <div className="feed">
             <StoryReel />

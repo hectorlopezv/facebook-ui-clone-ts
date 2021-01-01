@@ -5,9 +5,10 @@ import VideocamIcon from '@material-ui/icons/Videocam';
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import { useStateValue } from '../../../Store/StateContext';
-import {db} from '../../../lib/firebase.prod';
+// import {db} from '../../../lib/firebase.prod';
 import firebase from 'firebase';
 import FormData from 'form-data';//create form data like postman
+import instance from '../../../axios';
 export interface MessageProps {
     
 }
@@ -16,20 +17,56 @@ const Message: React.FC<MessageProps> = () => {
     const [state, dispatch] =  useStateValue();
     const [Input, setInput] = useState('');
     const [ImageURL, setImageURL] = useState<null | string>('');
-
+    const [image, setimage] = useState<any>(null);
 
     //replace with mongo db stuff
+    const savePost = async (post: any) => {
+        await instance.post('/upload/post', post).then((resp) => {
+            console.log(resp);
+        })
+    };
+
     const handleSubmit = (event: any) => {
         event.preventDefault();
         //Post to the FIRESTORE
         //post operations steps
         //post
         //images
+        
+        if(image){//upload image first and then post after
+            const imgForm: any = new FormData();//generate form_data for uploading image
+            imgForm.append('file', image, image.name);//file
+            instance.post('/upload/image', imgForm, {//upload image first then post
+                headers: {
+                    'accept': 'application/json',
+                    'Accept-Language': 'en-US,en;q=0.8',
+                    'Content-Type': `multipart/form-data; boundary=${imgForm._boundary}`,
+                }
+            }).then((res) => {
+                console.log(res.data);
 
+                //POst Data.....
+                const postData = {
+                    text: Input,
+                    imgName: res.data.filename,
+                    user: state.user.displayName,
+                    avatar: state.user.photoURL,
+                    timestamp: Date.now(),
+                }
 
+                savePost(postData);
 
+            })
+        }else { //just post the data
 
-
+            const postData = {
+                text: Input,
+                user: state.user.displayName,
+                avatar: state.user.photoURL,
+                timestamp: Date.now(),
+            }
+            savePost(postData);
+        }
 
         setInput('');
         setImageURL('');
