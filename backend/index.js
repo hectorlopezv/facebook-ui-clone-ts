@@ -6,11 +6,17 @@ import GridFsStorage from 'multer-gridfs-storage';//upload imaes to and store fr
 import Grid from 'gridfs-stream';//streaming
 import bodyParser from 'body-parser';//json middleware
 import path from 'path';
-import Pusher from 'pusher';//listener pattern
 import Posts from './post.js';
 //db schema
+import Pusher from 'pusher';
 
-
+const pusher = new Pusher({
+  appId: "1131115",
+  key: "f81994f70b8bafc3b71e",
+  secret: "18e0ce9c8ce6b71e1d89",
+  cluster: "us2",
+  useTLS: true
+});
 
 //Grid stuff
 Grid.mongo =  mongoose.mongo;
@@ -42,6 +48,23 @@ mongoose.connect(mongoURI, {//generic collection
 
 mongoose.connection.once('open', () => {
     console.log('db generic connected');
+    //watch updates on post collection
+    const changeStream = mongoose.connection.collection('posts').watch();
+
+    changeStream.on('change', (change) => {
+
+        if(change.operationType === 'insert'){
+            console.log('trigger pusher event');
+            pusher.trigger("posts", "inserted", {
+                posts: change
+              });
+        }else{
+            console.log('error pusher event')
+        }
+
+
+    })
+
 });
 
 let gfs;

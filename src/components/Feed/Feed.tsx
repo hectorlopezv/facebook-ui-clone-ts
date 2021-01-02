@@ -26,18 +26,16 @@ const Feed: React.FC<FeedProps> = () => {
            setposts(request.data);
         };
         syncFeed();
-    }, []);
-
-
-    //pusherjs and mongodb and update post when data changes
-    useEffect(() => {
-        //setting pusher subcribe event
-        const channel = pusher.subscribe('my-channel');
-        channel.bind('my-event', function(data: any) {
+        //pusher feed
+        const channel = pusher.subscribe('posts');
+        channel.bind('inserted', function(data: any) {
           //do stuff when data changes
-            
+          console.log('lo que llega de los posts de pusher', data);
+          syncFeed();
         });
     }, []);
+
+
 
 
 
@@ -64,7 +62,8 @@ const Feed: React.FC<FeedProps> = () => {
                     message={post.text}
                     timestamp={post.timestamp}
                     username={post.user}
-                    image={post?.imgName}
+                    image={post?.imgName
+                    }
                 />
                 ))}
 
