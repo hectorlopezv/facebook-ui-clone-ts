@@ -17,7 +17,8 @@ export interface PostProps {
  
 const Post: React.FC<PostProps> = ({profilePic, image, username, timestamp, message}) => {
     console.log('el timestamp', timestamp);
-    
+    // const [fetimage, setfetimage] = useState();
+    console.log('este es la imagen', image);
     return (  
         <div className="post">
             <div className="post__top">

@@ -64,7 +64,7 @@ const Feed: React.FC<FeedProps> = () => {
                     message={post.text}
                     timestamp={post.timestamp}
                     username={post.user}
-                    image={post?.image}
+                    image={post?.imgName}
                 />
                 ))}
 
