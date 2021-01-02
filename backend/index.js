@@ -92,12 +92,16 @@ app.post('/upload/post', (req, res)=> {
 //Get Post messages
 app.get('/retrieve/posts', (req, res)=> {
 
-    Post.find().sort([['timestamp', 'descending']]).all((err, posts) => {
+    Posts.find().sort({timestamp: 'desc'}).then((posts, err) => {
         // do something with the array of posts
+        console.log(posts);
+        console.log('error', err)
         if(err) {
+            console.log('entro aqui 1')
             res.status(500).send(err);
         } else {
-            res.status(200).send(data);
+            console.log('entro aqui 2');
+            res.status(200).send(posts);
         }
 
       });
@@ -108,7 +112,10 @@ app.get('/retrieve/posts', (req, res)=> {
 
 
 //post image save to mongo db
-app.post('/upload/image', upload.single('file'), (req, res) => {res.status(201).json({file:req.file})});
+app.post('/upload/image', upload.single('file'), (req, res) => {
+    
+
+    res.status(201).json({file:req.file})});
 
 //get image
 app.get('/image/:filename', (req, res) => {

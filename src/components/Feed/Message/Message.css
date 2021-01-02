@@ -13,6 +13,7 @@
     display: flex;
     border-bottom: 1px solid #eff2f5;
     padding: 15px;
+  
 }
 
 .message__top > form {
@@ -26,6 +27,7 @@
 
 .message__top > form > input {
     border: none;
+    cursor: pointer;
     outline-width: 0;
     padding: 5px 20px;
     margin: 0 10px;
@@ -33,6 +35,28 @@
     background-color: #eff2f5;
 }
 
+.message__top > form > input:hover {
+    background-color: #f0f2f585;
+}
+
+.message__option {
+    position: relative;
+}
+.message__option > input {
+    position: absolute;
+    
+    top: 10px;
+    right: 0;
+    text-align: left;
+    max-width: 100%;
+    min-height: 1%;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
 .message__top > form > button {
     display: none;
 }

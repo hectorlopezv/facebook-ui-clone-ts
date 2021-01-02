@@ -16,6 +16,7 @@ export interface PostProps {
 }
  
 const Post: React.FC<PostProps> = ({profilePic, image, username, timestamp, message}) => {
+    console.log('el timestamp', timestamp);
     
     return (  
         <div className="post">
@@ -23,7 +24,7 @@ const Post: React.FC<PostProps> = ({profilePic, image, username, timestamp, mess
                 <Avatar src={profilePic} className="post__avatar" />
                 <div className="post__topInfo">
                     <h3>{username}</h3>
-                    <p>{new Date(timestamp?.toDate()).toUTCString()}</p>
+                    <p>{timestamp}</p>
                 </div>
             </div>
 
@@ -33,7 +34,7 @@ const Post: React.FC<PostProps> = ({profilePic, image, username, timestamp, mess
 
             {/*image*/}
             <div className="post__image">
-                <img src={image} alt=""/>
+                <img src={image ? `http://localhost:9000/image/${image}` : ''} alt=""/>
             </div>
 
 

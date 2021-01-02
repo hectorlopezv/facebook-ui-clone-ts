@@ -5,7 +5,7 @@ import Message from './Message/Message';
 import Post from './Post/Post';
 import {db} from '../../lib/firebase.prod';
 import Pusher from 'pusher-js';
-import instance from 'axios';
+import instance from '../../axios';
 
 export interface FeedProps {
     
@@ -22,6 +22,7 @@ const Feed: React.FC<FeedProps> = () => {
     useEffect(() => {
         const syncFeed = async () => {
            const request = await instance.get('/retrieve/posts');
+           console.log(request);
            setposts(request.data);
         };
         syncFeed();
@@ -58,12 +59,12 @@ const Feed: React.FC<FeedProps> = () => {
 
              {posts?.map((post: any) => (
                 <Post
-                    key={post.id}
-                    profilePic={post.data.profilePic}
-                message={post.data.message}
-                    timestamp={post.data.timestamp}
-                username={post.data.username}
-                    image={post.data.image}
+                    key={post._id}
+                    profilePic={post.avatar}
+                    message={post.text}
+                    timestamp={post.timestamp}
+                    username={post.user}
+                    image={post?.image}
                 />
                 ))}
 

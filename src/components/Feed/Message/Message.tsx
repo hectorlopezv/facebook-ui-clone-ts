@@ -33,44 +33,44 @@ const Message: React.FC<MessageProps> = () => {
         //post
         //images
         
-        if(image){//upload image first and then post after
+        if(image !== null){//upload image first and then post after
             const imgForm: any = new FormData();//generate form_data for uploading image
             imgForm.append('file', image, image.name);//file
             instance.post('/upload/image', imgForm, {//upload image first then post
                 headers: {
                     'accept': 'application/json',
                     'Accept-Language': 'en-US,en;q=0.8',
-                    'Content-Type': `multipart/form-data; boundary=${imgForm._boundary}`,
+                    'Content-Type': `multipart/form-data;`,
                 }
-            }).then((res) => {
-                console.log(res.data);
+            }).then((res: any) => {
+                console.log('despues del upload de la image', res.data);
 
                 //POst Data.....
                 const postData = {
                     text: Input,
-                    imgName: res.data.filename,
+                    imgName: res.data.file.filename,
                     user: state.user.displayName,
                     avatar: state.user.photoURL,
-                    timestamp: Date.now(),
+                    timestamp: new Date().toUTCString(),
                 }
 
                 savePost(postData);
 
             })
         }else { //just post the data
-
+            console.log('no habia imagen');
             const postData = {
                 text: Input,
                 user: state.user.displayName,
                 avatar: state.user.photoURL,
-                timestamp: Date.now(),
+                timestamp: new Date().toUTCString(),
             }
             savePost(postData);
         }
 
         setInput('');
         setImageURL('');
-        setImageURL(null);
+        setimage(null);
     }
 
     return (  
@@ -82,12 +82,6 @@ const Message: React.FC<MessageProps> = () => {
                         className="message__input" value={Input} 
                         onChange={(event: any)=> setInput(event.target.value)} 
                         type="text" placeholder={`what on your mind ${state.user.displayName}?`}
-                    />
-                    <input 
-                        type="text" 
-                        value={ImageURL!}
-                        onChange={(event: any)=> setImageURL(event.target.value)} 
-                        placeholder="image URL(Optional)"
                     />
 
                     <button onClick={handleSubmit} type="submit">
@@ -105,6 +99,12 @@ const Message: React.FC<MessageProps> = () => {
 
                 <div className="message__option">
                     <PhotoLibraryIcon style={{ color: 'green' }} />
+                    
+                    <input 
+                        type="file" 
+                        onChange={(event: any) => setimage(event.target.files[0])}
+                        placeholder="image URL(Optional)"
+                    />
                     <h3>Photo/Video</h3>
                 </div>
 
