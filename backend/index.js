@@ -31,6 +31,7 @@ app.use(bodyParser.json());//read write json files
 app.use(cors({origin: true}));
 
 
+
 //db config stuff
 const mongoURI = 'mongodb+srv://hector:lamierda2@cluster0.gzybf.mongodb.net/fbdb?retryWrites=true&w=majority';
 
@@ -55,7 +56,7 @@ mongoose.connection.once('open', () => {
 
         if(change.operationType === 'insert'){
             console.log('trigger pusher event');
-            pusher.trigger("posts", "inserted", {
+            pusher.trigger("posts", "insert", {
                 posts: change
               });
         }else{

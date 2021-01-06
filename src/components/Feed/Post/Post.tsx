@@ -35,7 +35,7 @@ const Post: React.FC<PostProps> = ({profilePic, image, username, timestamp, mess
 
             {/*image*/}
             <div className="post__image">
-                <img src={image ? `http://localhost:9000/image/${image}` : ''} alt=""/>
+                <img src={image ? `https://facebook-mongodob-backedn.herokuapp.com/image/${image}` : ''} alt=""/>
             </div>
 
 

@@ -10,10 +10,11 @@ import instance from '../../axios';
 export interface FeedProps {
     
 }
-const pusher = new Pusher('f81994f70b8bafc3b71e', {
-    cluster: 'us2'
-});
+Pusher.logToConsole = true;
 
+var pusher = new Pusher('f81994f70b8bafc3b71e', {
+  cluster: 'us2'
+});
 const Feed: React.FC<FeedProps> = () => {
     const [posts, setposts] = useState<any>();
 
@@ -22,13 +23,14 @@ const Feed: React.FC<FeedProps> = () => {
     useEffect(() => {
         const syncFeed = async () => {
            const request = await instance.get('/retrieve/posts');
-           console.log(request);
+           console.log('el nuevo feed', request);
            setposts(request.data);
         };
         syncFeed();
         //pusher feed
         const channel = pusher.subscribe('posts');
-        channel.bind('inserted', function(data: any) {
+        channel.bind('insert', function(data: any) {
+            console.log('se cambio esto')
           //do stuff when data changes
           console.log('lo que llega de los posts de pusher', data);
           syncFeed();
